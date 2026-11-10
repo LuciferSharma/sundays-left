@@ -1,5 +1,5 @@
 {
-  "name": "calendar-of-your-life",
+  "name": "sundays-left",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -30,7 +30,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.14.0",
-    "fibers": "^5.0.0",
     "jest": "^27.0.5",
     "prettier": "^2.3.2",
     "sass": "^1.36.0",
@@ -40,6 +39,6 @@
     "vue-jest": "^3.0.4"
   },
   "engines": {
-    "node": ">=10 <16"
+    "node": ">=14"
   }
 }

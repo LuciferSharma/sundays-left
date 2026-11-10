@@ -1,18 +1,19 @@
 import { getterTree, mutationTree } from 'typed-vuex'
+import { positionForDate } from '~/utils/stats'
 
 interface Store {
   date: Date | null
+  /** True while the user is changing an existing birthday */
+  editing: boolean
 }
 
 interface SetPayload {
   date: Date
 }
 
-// May 21, 1998
-const tmp = new Date(1998, 4, 21)
-
 export const state = (): Store => ({
-  date: tmp,
+  date: null,
+  editing: false,
 })
 
 const ONE_DAY = 1000 * 60 * 60 * 24
@@ -26,10 +27,23 @@ export const getters = getterTree(state, {
     const daysBetween = Math.round((nowEpoch - birthdayEpoch) / ONE_DAY)
     return Math.ceil(daysBetween / 7)
   },
+  /**
+   * Position of "now" on the calendar grid: the row is the completed years of
+   * age, the column is the number of full weeks since the last birthday.
+   */
+  elapsedPosition: (state) =>
+    state.date ? positionForDate(state.date, new Date()) : null,
 })
 
 export const mutations = mutationTree(state, {
   set(state, { date }: SetPayload) {
     state.date = date
+    state.editing = false
+  },
+  startEditing(state) {
+    state.editing = true
+  },
+  cancelEditing(state) {
+    state.editing = false
   },
 })

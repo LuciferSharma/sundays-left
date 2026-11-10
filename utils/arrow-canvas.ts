@@ -25,8 +25,13 @@ export class ArrowCanvasPainter {
     const canvasWidth = textDimensions.width + ARROW_OVERFLOW_RIGHT
     const canvasHeight = textDimensions.height + LINE_PADDING + arrowHeight
 
-    this.canvas.width = canvasWidth
-    this.canvas.height = canvasHeight
+    // Render at 2x+ so the labels stay sharp on high-DPI screens / zoom
+    const ratio = Math.max(2, window.devicePixelRatio || 1)
+    this.canvas.width = Math.round(canvasWidth * ratio)
+    this.canvas.height = Math.round(canvasHeight * ratio)
+    this.canvas.style.width = `${canvasWidth}px`
+    this.canvas.style.height = `${canvasHeight}px`
+    this.getContext().setTransform(ratio, 0, 0, ratio, 0, 0)
 
     // Draw everything
     this.drawText(text, drawArrowBottom)

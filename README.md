@@ -1,78 +1,46 @@
-# Calendar of Your Life
+# Sundays Left
 
-A web application based on Kurzgesagt's [Calendar of Your Life Infographic](https://shop-us.kurzgesagt.org/collections/existential-dread/products/lifespan-calendar-poster?variant=39451596423216) poster. I knew I would be too lazy to carry the poster around and I wanted to make it digital and free for everyone to use. If you like this kind of work and would like to support the original creators, please consider donating to Kurzgesagt's [Patreon](https://kurzgesagt.org/patreon-2/).
+**Your whole life on one page, one dot per week.**
 
-## Incentive
+Enter your birthday and see every week you've lived and every week you (statistically) have left: 52 dots a row, one row per year, coloured by stage of life. It's a quiet nudge to make this Sunday count.
 
-> On most days, life is sort of happening, passing you by. You are just busy keeping your head above water. So it is not easy to figure out what to do with your life and how to spend your time. The Calendar of Your Life website lets you track how many weeks of your life you have spent already and how many you have left
+**▶ Live: https://USERNAME.github.io/sundays-left/**
 
-## Video
+## Features
 
-[![YouTube thumbnail](http://i3.ytimg.com/vi/JXeJANDKwDc/maxresdefault.jpg)](https://www.youtube.com/watch?v=JXeJANDKwDc)
+- **Your life in weeks:** lived weeks fill in, and the current week is outlined.
+- **Mark the weeks that matter:** graduations, moves, birthdays, plans. Click any week on the chart or type a date, then add a label and colour.
+- **Make it yours:** your own title, circle / rounded / square cells, and custom colours for each life stage.
+- **Zoom:** buttons, `+` / `-` keys, Ctrl + scroll, and fit modes for the page width or the whole chart.
+- **Print & save:** a clean poster for printing, or a high-resolution PNG.
+- **Private by design:** everything stays in your browser's local storage. No accounts, no server.
 
-## Build Setup
+## Development
+
+Requires Node 14+. On Node 17 or newer, webpack 4 needs the legacy OpenSSL provider.
 
 ```bash
-# install dependencies
-$ npm install
+# install (skipping native build scripts that modern Node can't compile)
+npm ci --ignore-scripts
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+# dev server with hot reload at http://localhost:3000
+NODE_OPTIONS=--openssl-legacy-provider npm run dev
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+# lint + tests
+npm run lint
+npm test
 
-# generate static project
-$ npm run generate
+# static build into dist/
+NODE_OPTIONS=--openssl-legacy-provider npm run generate
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+On Windows PowerShell, set the variable first: `$env:NODE_OPTIONS="--openssl-legacy-provider"`.
 
-## Special Directories
+## Deployment
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+Every push to `master` is linted, tested, built and published to GitHub Pages by [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). The site's base path comes from the repository name automatically.
 
-### `assets`
+## Credits
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+- Inspired by Kurzgesagt's [Calendar of Your Life](https://shop-us.kurzgesagt.org/collections/existential-dread/products/lifespan-calendar-poster) poster. If you like the idea, consider supporting them on [Patreon](https://kurzgesagt.org/patreon-2/).
+- Built on top of [Abbondanzo/calendar-of-your-life](https://github.com/Abbondanzo/calendar-of-your-life) by Peter Abbondanzo.
