@@ -4,7 +4,7 @@
 
 Enter your birthday and see every week you've lived and every week you (statistically) have left: 52 dots a row, one row per year, coloured by stage of life. It's a quiet nudge to make this Sunday count.
 
-**▶ Live: https://USERNAME.github.io/sundays-left/**
+**▶ Live: https://lucifersharma.github.io/sundays-left/**
 
 ## Features
 
