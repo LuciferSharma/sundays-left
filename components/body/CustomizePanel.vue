@@ -29,10 +29,10 @@
             <h3>Mark a week</h3>
             <p class="help">
               Highlight weeks that mattered or are coming up. You can also
-              click any week on the chart.
+              click or tap any week on the chart.
             </p>
             <form class="mark-form" @submit.prevent="addMilestone">
-              <div class="row">
+              <div class="row fields">
                 <label class="stack">
                   <span class="label">Date</span>
                   <DateInput ref="dateInput" v-model="draft.date" />
@@ -741,5 +741,54 @@ h3 {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+// Phones: stack date + label so neither gets squashed
+@media (max-width: 480px) {
+  .row.fields {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .panel-body {
+    padding: 0.25rem 1rem 2rem;
+  }
+}
+
+// Fingers: larger swatches and fields; 16px text avoids iOS focus zoom
+@media (pointer: coarse) {
+  .swatch {
+    width: 34px;
+    height: 34px;
+  }
+
+  .palette {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .text {
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .btn {
+    height: 44px;
+    padding: 0 1.4rem;
+  }
+
+  .remove,
+  .close {
+    width: 40px;
+    height: 40px;
+  }
+
+  .color-row {
+    min-height: 44px;
+  }
+
+  .link {
+    padding: 0.6rem 0;
+  }
 }
 </style>

@@ -130,6 +130,12 @@ h1 {
   grid-template-columns: repeat(3, auto);
   justify-content: start;
   gap: 1.25rem 2.5rem;
+
+  // Three equal columns that can shrink, so 320px screens never overflow
+  @media (max-width: 520px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem 0.75rem;
+  }
 }
 
 .stat {
@@ -139,7 +145,7 @@ h1 {
 
   .value {
     font-family: var(--font-display);
-    font-size: clamp(26px, 3vw, 36px);
+    font-size: clamp(20px, 6.5vw, 36px);
     line-height: 1;
     font-variant-numeric: tabular-nums;
 
@@ -150,7 +156,7 @@ h1 {
   }
 
   .label {
-    font-size: 11px;
+    font-size: clamp(9.5px, 2.6vw, 11px);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--ink-soft);

@@ -343,12 +343,19 @@ export default Vue.extend({
 
 .date-fields {
   position: relative;
-  display: flex;
-  align-items: flex-end;
-  gap: 0.75rem;
+  // Fluid grid so day / month / year always fit, down to 320px screens
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.75fr)
+    auto;
+  align-items: end;
+  gap: clamp(0.35rem, 2vw, 0.75rem);
+  max-width: 520px;
   margin: 0;
   padding: 0;
   border: 0;
+  // fieldsets have an intrinsic min-width that causes overflow otherwise
+  min-width: 0;
 }
 
 .field {
@@ -364,7 +371,7 @@ export default Vue.extend({
     border-radius: 0;
     background: transparent;
     font-family: var(--font-display);
-    font-size: clamp(34px, 6vw, 52px);
+    font-size: clamp(26px, 9vw, 52px);
     line-height: 1;
     text-align: center;
     font-variant-numeric: tabular-nums;
@@ -373,6 +380,8 @@ export default Vue.extend({
     &::placeholder {
       color: var(--ink-faint);
       opacity: 0.55;
+      // Letter placeholders are wider than digits; keep them inside the field
+      font-size: 0.72em;
     }
 
     &:focus {
@@ -382,16 +391,8 @@ export default Vue.extend({
   }
 }
 
-.field-day,
-.field-month {
-  width: 3.2ch;
-  flex: 0 0 auto;
-  min-width: 78px;
-}
-
-.field-year {
-  width: 5.4ch;
-  min-width: 140px;
+.field {
+  min-width: 0;
 }
 
 .field-label {
@@ -404,7 +405,7 @@ export default Vue.extend({
 .sep {
   padding-bottom: 0.7rem;
   font-family: var(--font-display);
-  font-size: 32px;
+  font-size: clamp(20px, 6vw, 32px);
   color: var(--ink-faint);
 }
 
@@ -415,9 +416,9 @@ export default Vue.extend({
 .picker-button {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
-  margin-left: 0.5rem;
+  width: 44px;
+  height: 44px;
+  margin-left: clamp(0rem, 1vw, 0.5rem);
   margin-bottom: 0.25rem;
   border: 1.5px solid var(--line);
   border-radius: 50%;

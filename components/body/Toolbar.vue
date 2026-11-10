@@ -100,7 +100,7 @@
           <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
             <path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          Save image
+          Save<span class="label-long">&nbsp;image</span>
         </button>
       </div>
       </div>
@@ -383,24 +383,6 @@ button {
   margin-left: auto;
 }
 
-// On small screens a multi-row sticky bar would eat the chart, so let it
-// scroll away and wrap freely
-@media (max-width: 760px) {
-  .toolbar-wrap {
-    position: static;
-  }
-
-  .right {
-    flex-wrap: wrap;
-    margin-left: 0;
-  }
-
-  .zoom,
-  .actions {
-    flex-wrap: wrap;
-  }
-}
-
 .zoom {
   gap: 0.25rem;
   flex-wrap: nowrap;
@@ -497,5 +479,105 @@ button {
 .actions {
   gap: 0.4rem;
   flex-wrap: nowrap;
+}
+
+// Bigger hit areas for fingers (WCAG target size / Apple HIG ~44px)
+@media (pointer: coarse) {
+  .born,
+  .switch,
+  .stepper,
+  .chip,
+  .segmented {
+    height: 40px;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .stepper {
+    button {
+      width: 36px;
+    }
+
+    // 16px stops iOS Safari zooming the page when the field is focused
+    input {
+      font-size: 16px;
+    }
+  }
+
+  .switch {
+    .track {
+      width: 36px;
+      height: 20px;
+    }
+
+    .thumb {
+      width: 16px;
+      height: 16px;
+    }
+
+    &[aria-checked='true'] .thumb {
+      transform: translateX(16px);
+    }
+  }
+}
+
+// Phones: a tidy stacked layout instead of a wrapped jumble. The bar also
+// scrolls away, since a tall sticky bar would cover the chart.
+@media (max-width: 760px) {
+  .toolbar-wrap {
+    position: static;
+    padding: 0.75rem 1rem 0.9rem;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .born {
+    align-self: flex-start;
+    margin-left: -0.75rem;
+  }
+
+  .group {
+    justify-content: space-between;
+  }
+
+  .right {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+    margin-left: 0;
+  }
+
+  .zoom {
+    justify-content: space-between;
+
+    .segmented {
+      margin-left: auto;
+    }
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    .chip {
+      justify-content: center;
+      padding: 0 0.5rem;
+    }
+  }
+
+  .label-long {
+    display: none;
+  }
 }
 </style>

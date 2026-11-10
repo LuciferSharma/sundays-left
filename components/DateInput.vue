@@ -174,4 +174,18 @@ export default Vue.extend({
     }
   }
 }
+
+@media (pointer: coarse) {
+  .date-input {
+    height: 44px;
+    width: 100%;
+    justify-content: flex-start;
+
+    input {
+      // 16px stops iOS Safari zooming in when a field is focused
+      font-size: 16px;
+      height: 100%;
+    }
+  }
+}
 </style>
